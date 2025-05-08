@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Todo-app</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="container">
+        <h1>Todo</h1>
+        <div class="add-container">
+          <p id="empty"></p>
+          <ul id="todo-array">
+            <!-- <li>dfdf</li>
+                <li>dfdf</li>
+                <li>dfdf</li> -->
+          </ul>
+          <input type="text" id="todo-input" placeholder="Add your todo" />
+          <button class="btn" id="btn-click">Add Todo</button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    let btn = document.getElementById("btn-click");
+    let todos = document.getElementById("todo-array");
+    let todoItem = todos.getElementsByTagName("li");
+    let input = document.getElementById("todo-input");
+
+    let empty = document.getElementById("empty");
+
+    function checkList() {
+      if (todoItem.length === 0) {
+        empty.textContent = "Empty";
+        todos.style.display = "none";
+      } else if (todoItem.length > 0) {
+        empty.style.display = "none";
+        todos.style.display = "block";
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", checkList);
+
+    btn.addEventListener("click", () => {
+      let newTodo = input.value;
+      if (newTodo) {
+        empty.style.display = "none";
+        todos.style.display = "block";
+        let li = document.createElement("li");
+        li.textContent = newTodo;
+        todos.append(li);
+      }
+
+      input.value = "";
+    });
+  </script>
+</html>
