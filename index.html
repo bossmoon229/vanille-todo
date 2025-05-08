@@ -13,9 +13,9 @@
         <div class="add-container">
           <p id="empty"></p>
           <ul id="todo-array">
-            <!-- <li>dfdf</li>
-                <li>dfdf</li>
-                <li>dfdf</li> -->
+            <!-- <li>Task 1 <button id="delete">Delete</button></li>
+            <li>Task 2 <button id="delete">Delete</button></li>
+            <li>Task 3 <button id="delete">Delete</button></li> -->
           </ul>
           <input type="text" id="todo-input" placeholder="Add your todo" />
           <button class="btn" id="btn-click">Add Todo</button>
@@ -28,6 +28,7 @@
     let todos = document.getElementById("todo-array");
     let todoItem = todos.getElementsByTagName("li");
     let input = document.getElementById("todo-input");
+    let deleteTodo = document.getElementById("delete");
 
     let empty = document.getElementById("empty");
 
@@ -44,16 +45,26 @@
     document.addEventListener("DOMContentLoaded", checkList);
 
     btn.addEventListener("click", () => {
-      let newTodo = input.value;
+      let newTodo = input.value.trim();
       if (newTodo) {
-        empty.style.display = "none";
-        todos.style.display = "block";
-        let li = document.createElement("li");
+        const li = document.createElement("li");
         li.textContent = newTodo;
-        todos.append(li);
-      }
 
-      input.value = "";
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete";
+        deleteBtn.className = "delete-btn";
+
+        deleteBtn.addEventListener("click", () => {
+          li.remove();
+          checkList(); // перевірка після видалення
+        });
+
+        li.appendChild(deleteBtn);
+        todos.appendChild(li);
+        input.value = "";
+
+        checkList(); // перевірка після додавання
+      }
     });
   </script>
 </html>
